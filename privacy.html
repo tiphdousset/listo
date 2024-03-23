@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Listo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have" />
+
+<meta property="og:title" content="Listo">
+<meta property="og:description"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have">
+<meta property="og:image" content="}ndroid-chrome-512x512.png">
+<meta property="og:url" content="https://listo.social">
+<meta name="twitter:card"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have">
+<style>
+    /* page navigation */
+    .page-navigation-body-side {
+        max-width: 970px !important;
+        /* theme body + 220px navigation */
+    }
+
+    .page-navigation-body.page-navigation-body-side .page-navigation-wrap {
+        flex-wrap: wrap-reverse;
+    }
+
+    .page-navigation-body-side .page-navigation-wrap {
+        display: flex;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-navigation-body-side .page-navigation-wrap .page-navigation {
+        width: 200px;
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation {
+        padding-bottom: 20px;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation ul {
+        align-items: center;
+        display: flex;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation ul>li {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .page-navigation-wrap .page-navigation ul {
+        list-style-type: none;
+    }
+
+    .page-navigation-wrap .page-navigation li {
+        margin: 0;
+    }
+
+    .page-navigation-wrap .page-navigation a {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 2px 8px;
+        display: inline-block;
+    }
+
+    .page-navigation-body .page-navigation-wrap .page-content {
+        max-width: 750px;
+    }
+
+
+    /* new.css 1.1.3 */
+    /* modification: body, .preview-body { ... } */
+
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    address,
+    area,
+    article,
+    aside,
+    audio,
+    blockquote,
+    datalist,
+    details,
+    dl,
+    fieldset,
+    figure,
+    form,
+    iframe,
+    img,
+    input,
+    meter,
+    nav,
+    ol,
+    optgroup,
+    option,
+    output,
+    p,
+    pre,
+    progress,
+    ruby,
+    section,
+    table,
+    textarea,
+    ul,
+    video {
+        margin-bottom: 1rem
+    }
+
+    button,
+    html,
+    input,
+    select {
+        font-family: var(--nc-font-sans)
+    }
+
+    body,
+    .preview-body {
+        margin: 0 auto;
+        max-width: 750px;
+        padding: 2rem;
+        border-radius: 6px;
+        overflow-x: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        background: var(--nc-bg-1);
+        color: var(--nc-tx-2);
+        font-size: 1.03rem;
+        line-height: 1.5
+    }
+
+    ::selection {
+        background: var(--nc-ac-1);
+        color: var(--nc-ac-tx)
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1;
+        color: var(--nc-tx-1);
+        padding-top: .875rem
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: var(--nc-tx-1);
+        padding-bottom: 2px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid var(--nc-bg-2)
+    }
+
+    h4,
+    h5,
+    h6 {
+        margin-bottom: .3rem
+    }
+
+    h1 {
+        font-size: 2.25rem
+    }
+
+    h2 {
+        font-size: 1.85rem
+    }
+
+    h3 {
+        font-size: 1.55rem
+    }
+
+    h4 {
+        font-size: 1.25rem
+    }
+
+    h5 {
+        font-size: 1rem
+    }
+
+    h6 {
+        font-size: .875rem
+    }
+
+    a {
+        color: var(--nc-lk-1)
+    }
+
+    a:hover {
+        color: var(--nc-lk-2)
+    }
+
+    abbr:hover {
+        cursor: help
+    }
+
+    blockquote {
+        padding: 1.5rem;
+        background: var(--nc-bg-2);
+        border-left: 5px solid var(--nc-bg-3)
+    }
+
+    abbr {
+        cursor: help
+    }
+
+    blockquote :last-child {
+        padding-bottom: 0;
+        margin-bottom: 0
+    }
+
+    header {
+        background: var(--nc-bg-2);
+        border-bottom: 1px solid var(--nc-bg-3);
+        padding: 2rem 1.5rem;
+        margin: -2rem calc(0px - (50vw - 50%)) 2rem;
+        padding-left: calc(50vw - 50%);
+        padding-right: calc(50vw - 50%)
+    }
+
+    header h1,
+    header h2,
+    header h3 {
+        padding-bottom: 0;
+        border-bottom: 0
+    }
+
+    header>:first-child {
+        margin-top: 0;
+        padding-top: 0
+    }
+
+    header>:last-child {
+        margin-bottom: 0
+    }
+
+    a button,
+    button,
+    input[type=button],
+    input[type=reset],
+    input[type=submit] {
+        font-size: 1rem;
+        display: inline-block;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        background: var(--nc-lk-1);
+        color: var(--nc-lk-tx);
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        color: var(--nc-lk-tx)
+    }
+
+    a button[disabled],
+    button[disabled],
+    input[type=button][disabled],
+    input[type=reset][disabled],
+    input[type=submit][disabled] {
+        cursor: default;
+        opacity: .5;
+        cursor: not-allowed
+    }
+
+    .button:focus,
+    .button:hover,
+    button:focus,
+    button:hover,
+    input[type=button]:focus,
+    input[type=button]:hover,
+    input[type=reset]:focus,
+    input[type=reset]:hover,
+    input[type=submit]:focus,
+    input[type=submit]:hover {
+        background: var(--nc-lk-2)
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        font-family: var(--nc-font-mono)
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        background: var(--nc-bg-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px;
+        padding: 3px 6px;
+        font-size: .9rem
+    }
+
+    kbd {
+        border-bottom: 3px solid var(--nc-bg-3)
+    }
+
+    pre {
+        padding: 1rem 1.4rem;
+        max-width: 100%;
+        overflow: auto
+    }
+
+    pre code {
+        background: inherit;
+        font-size: inherit;
+        color: inherit;
+        border: 0;
+        padding: 0;
+        margin: 0
+    }
+
+    code pre {
+        display: inline;
+        background: inherit;
+        font-size: inherit;
+        color: inherit;
+        border: 0;
+        padding: 0;
+        margin: 0
+    }
+
+    details {
+        padding: .6rem 1rem;
+        background: var(--nc-bg-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px
+    }
+
+    summary {
+        cursor: pointer;
+        font-weight: 700
+    }
+
+    details[open] {
+        padding-bottom: .75rem
+    }
+
+    details[open] summary {
+        margin-bottom: 6px
+    }
+
+    details[open]>:last-child {
+        margin-bottom: 0
+    }
+
+    dt {
+        font-weight: 700
+    }
+
+    dd::before {
+        content: '→ '
+    }
+
+    hr {
+        border: 0;
+        border-bottom: 1px solid var(--nc-bg-3);
+        margin: 1rem auto
+    }
+
+    fieldset {
+        margin-top: 1rem;
+        padding: 2rem;
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px
+    }
+
+    legend {
+        padding: auto .5rem
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%
+    }
+
+    td,
+    th {
+        border: 1px solid var(--nc-bg-3);
+        text-align: left;
+        padding: .5rem
+    }
+
+    th {
+        background: var(--nc-bg-2)
+    }
+
+    tr:nth-child(even) {
+        background: var(--nc-bg-2)
+    }
+
+    table caption {
+        font-weight: 700;
+        margin-bottom: .5rem
+    }
+
+    textarea {
+        max-width: 100%
+    }
+
+    ol,
+    ul {
+        padding-left: 2rem
+    }
+
+    li {
+        margin-top: .4rem
+    }
+
+    ol ol,
+    ol ul,
+    ul ol,
+    ul ul {
+        margin-bottom: 0
+    }
+
+    mark {
+        padding: 3px 6px;
+        background: var(--nc-ac-1);
+        color: var(--nc-ac-tx)
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 6px 12px;
+        margin-bottom: .5rem;
+        background: var(--nc-bg-2);
+        color: var(--nc-tx-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px;
+        box-shadow: none;
+        box-sizing: border-box
+    }
+
+    img {
+        max-width: 100%
+    }
+
+
+    /* custom new.css overwrites */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        border-bottom: 0 !important;
+    }
+
+    /* custom active links */
+    .active-link {
+        background-color: var(--nav-link-highlight-color);
+        border-radius: 3px;
+    }
+
+    /* Light mode */
+
+    :root {
+        --nc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --nc-font-mono: 'Roboto Mono', Consolas, monaco, 'Liberation Mono', 'Courier New', Courier, monospace;
+        --nc-tx-1: #000000;
+        /* Heading text color */
+        --nc-tx-2: #1A1A1A;
+        /* Body text color */
+        --nc-bg-1: #FFFFFF;
+        /* Base background color */
+        --nc-bg-2: #F6F8FA;
+        /* Slightly darker background color */
+        --nc-bg-3: #E5E7EB;
+        /* Even slightly darker background color */
+        --nc-lk-1: #3F3F3F;
+        /* Action color for links and buttons */
+        --nc-lk-2: #000000;
+        /* Link and buttons on mouse hover and active */
+        --nc-lk-tx: #FFFFFF;
+        /* Text color for link buttons, or cases where link color is used as a background */
+        --nc-ac-1: #3F3F3F;
+        /* Accent background color for <mark> and text selection background */
+        --nc-ac-tx: #FFFFFF;
+        /* Text color when accent is used as a background */
+        --nav-link-color: var(--nc-tex-2);
+        --nav-link-highlight-color: #c2e8ff;
+    }
+
+
+    /* Dark mode */
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --nc-tx-1: #F1F1F1;
+            /* Heading text color */
+            --nc-tx-2: #E1E1E1;
+            /* Body text color */
+            --nc-bg-1: #1E1E1E;
+            /* Base background color */
+            --nc-bg-2: #232323;
+            /* Slightly lighter background color */
+            --nc-bg-3: #333333;
+            /* Even slightly lighter background color */
+            --nc-lk-1: #8FC3FF;
+            /* Action color for links and buttons */
+            --nc-lk-2: #FFFFFF;
+            /* Link and buttons on mouse hover and active */
+            --nc-lk-tx: #000000;
+            /* Text color for link buttons, or cases where link color is used as a background */
+            --nc-ac-1: #86BDFC;
+            /* Accent background color for <mark> and text selection background */
+            --nc-ac-tx: #FFFFFF;
+            /* Text color when accent is used as a background */
+            --nav-link-color: var(--nc-tex-2);
+            --nav-link-highlight-color: #4a5664;
+        }
+</style>
+</head>
+
+<body class="page-navigation-body-none page-navigation-body">
+
+    <h1 id="privacy-policy">PRIVACY POLICY</h1>
+    <p><em>Last updated March 16, 2020</em></p>
+    <p>Thank you for choosing to be part of our community at Listo (“Company”, “we”, “us”, or “our”). We are committed
+        to protecting your personal information and your right to privacy. If you have any questions or concerns about
+        our policy, or our practices with regards to your personal information, please contact us at <a
+            href="mailto:mail@listo.social">mail@listo.social</a>.</p>
+    <p>When you visit our mobile application, and use our services, you trust us with your personal information. We take
+        your privacy very seriously. In this privacy policy, we seek to explain to you in the clearest way possible what
+        information we collect, how we use it and what rights you have in relation to it. We hope you take some time to
+        read through it carefully, as it is important. If there are any terms in this privacy policy that you do not
+        agree with, please discontinue use of our Apps and our services.</p>
+    <p>This privacy policy applies to all information collected through our mobile application, ("Apps"), and/or any
+        related services, sales, marketing or events (we refer to them collectively in this privacy policy as the
+        "Services").</p>
+    <p><strong>Please read this privacy policy carefully as it will help you make informed decisions about sharing your
+            personal information with us.</strong></p>
+    <h2 id="1-what-information-do-we-collect">1. WHAT INFORMATION DO WE COLLECT?</h2>
+    <h3 id="personal-information-you-disclose-to-us">Personal information you disclose to us</h3>
+    <p><strong>In Short</strong>: We collect personal information that you provide to us.</p>
+    <p>We collect personal information that you voluntarily provide to us when registering at the Apps, expressing an
+        interest in obtaining information about us or our products and services, when participating in activities on the
+        Apps (such as posting messages in our online forums or entering competitions, contests or giveaways) or
+        otherwise contacting us.</p>
+    <p>The personal information that we collect depends on the context of your interactions with us and the Apps, the
+        choices you make and the products and features you use. The personal information we collect can include the
+        following:</p>
+    <p><strong>Publicly Available Personal Information.</strong> We collect first name, maiden name, last name, and
+        nickname; phone numbers; and other similar data.</p>
+    <p><strong>Personal Information Provided by You.</strong> We collect app usage; and other similar data.</p>
+    <p>All personal information that you provide to us must be true, complete and accurate, and you must notify us of
+        any changes to such personal information.</p>
+    <h3 id="information-automatically-collected">Information automatically collected</h3>
+    <p><strong>In Short:</strong> Some information — such as IP address and/or browser and device characteristics — is
+        collected automatically when you visit our Apps.</p>
+    <p>We automatically collect certain information when you visit, use or navigate the Apps. This information does not
+        reveal your specific identity (like your name or contact information) but may include device and usage
+        information, such as your IP address, browser and device characteristics, operating system, language
+        preferences, referring URLs, device name, country, location, information about how and when you use our Apps and
+        other technical information. This information is primarily needed to maintain the security and operation of our
+        Apps, and for our internal analytics and reporting purposes.</p>
+    <p>Like many businesses, we also collect information through cookies and similar technologies.</p>
+    <p><strong>Online Identifiers.</strong> We collect cookie identifiers, or others such as the ones used for analytics
+        and marketing; and other similar data.</p>
+    <h3 id="information-collected-through-our-apps">Information collected through our Apps</h3>
+    <p><strong>In Short</strong>: We may collect information regarding your geo-location, mobile device, push
+        notifications, when you use our apps.</p>
+    <p>If you use our Apps, we may also collect the following information:</p>
+    <ul>
+        <li>
+            <p>Geo-Location Information. We may request access or permission to and track location-based information
+                from your mobile device, either continuously or while you are using our mobile application, to provide
+                location-based services. If you wish to change our access or permissions, you may do so in your device's
+                settings.</p>
+        </li>
+        <li>
+            <p>Mobile Device Access. We may request access or permission to certain features from your mobile device,
+                including your mobile device's contacts, sms messages, and other features. If you wish to change our
+                access or permissions, you may do so in your device's settings.</p>
+        </li>
+        <li>
+            <p>Mobile Device Data. We may automatically collect device information (such as your mobile device ID, model
+                and manufacturer), operating system, version information and IP address.</p>
+        </li>
+        <li>
+            <p>Push Notifications. We may request to send you push notifications regarding your account or the mobile
+                application. If you wish to opt-out from receiving these types of communications, you may turn them off
+                in your device's settings.</p>
+        </li>
+    </ul>
+    <h2 id="2-how-do-we-use-your-information">2. HOW DO WE USE YOUR INFORMATION?</h2>
+    <p><strong>In Short:</strong> We process your information for purposes based on legitimate business interests, the
+        fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.</p>
+    <p>We use personal information collected via our Apps for a variety of business purposes described below. We process
+        your personal information for these purposes in reliance on our legitimate business interests, in order to enter
+        into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We
+        indicate the specific processing grounds we rely on next to each purpose listed below.</p>
+    <p>We use the information we collect or receive:</p>
+    <ul>
+        <li>
+            <p><strong>To facilitate account creation and logon process.</strong> If you choose to link your account
+                with us to a third party account (such as your Google or Facebook account), we use the information you
+                allowed us to collect from those third parties to facilitate account creation and logon process for the
+                performance of the contract.</p>
+        </li>
+        <li>
+            <p><strong>To send administrative information to you.</strong> We may use your personal information to send
+                you product, service and new feature information and/or information about changes to our terms,
+                conditions, and policies.</p>
+        </li>
+        <li>
+            <p><strong>To enable user-to-user communications.</strong> We may use your information in order to enable
+                user-to-user communications with each user's consent.</p>
+        </li>
+        <li>
+            <p><strong>To manage user accounts.</strong> We may use your information for the purposes of managing our
+                account and keeping it in working order.</p>
+        </li>
+        <li>
+            <p><strong>To deliver services to the user.</strong> We may use your information to provide you with the
+                requested service.</p>
+        </li>
+        <li>
+            <p><strong>For other Business Purposes.</strong> We may use your information for other Business Purposes,
+                such as data analysis, identifying usage trends, determining the effectiveness of our promotional
+                campaigns and to evaluate and improve our Apps, products, marketing and your experience. We may use and
+                store this information in aggregated and anonymized form so that it is not associated with individual
+                end users and does not include personal information. We will not use identifiable personal information
+                without your consent.</p>
+        </li>
+    </ul>
+    <h2 id="3-will-your-information-be-shared-with-anyone">3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?</h2>
+    <p><strong>In Short:</strong> We only share information with your consent, to comply with laws, to provide you with
+        services, to protect your rights, or to fulfill business obligations.</p>
+    <p>We may process or share data based on the following legal basis:</p>
+    <ul>
+        <li>
+            <p><strong>Consent:</strong> We may process your data if you have given us specific consent to use your
+                personal information in a specific purpose.</p>
+        </li>
+        <li>
+            <p><strong>Legitimate Interests:</strong> We may process your data when it is reasonably necessary to
+                achieve our legitimate business interests.</p>
+        </li>
+        <li>
+            <p><strong>Performance of a Contract:</strong> Where we have entered into a contract with you, we may
+                process your personal information to fulfill the terms of our contract.</p>
+        </li>
+        <li>
+            <p><strong>Legal Obligations:</strong> We may disclose your information where we are legally required to do
+                so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or
+                legal process, such as in response to a court order or a subpoena (including in response to public
+                authorities to meet national security or law enforcement requirements).</p>
+        </li>
+        <li>
+            <p><strong>Vital Interests:</strong> We may disclose your information where we believe it is necessary to
+                investigate, prevent, or take action regarding potential violations of our policies, suspected fraud,
+                situations involving potential threats to the safety of any person and illegal activities, or as
+                evidence in litigation in which we are involved.</p>
+        </li>
+    </ul>
+    <p>More specifically, we may need to process your data or share your personal information in the following
+        situations:</p>
+    <ul>
+        <li>
+            <p><strong>Vendors, Consultants and Other Third-Party Service Providers.</strong> We may share your data
+                with third party vendors, service providers, contractors or agents who perform services for us or on our
+                behalf and require access to such information to do that work. Examples include: payment processing,
+                data analysis, email delivery, hosting services, customer service and marketing efforts. We may allow
+                selected third parties to use tracking technology on the Apps, which will enable them to collect data
+                about how you interact with the Apps over time. This information may be used to, among other things,
+                analyze and track data, determine the popularity of certain content and better understand online
+                activity. Unless described in this Policy, we do not share, sell, rent or trade any of your information
+                with third parties for their promotional purposes. We have contracts in place with our data processors.
+                This means that they cannot do anything with your personal information unless we have instructed them to
+                do it. They will not share your personal information with any organisation apart from us. They will hold
+                it securely and retain it for the period we instruct.</p>
+        </li>
+        <li>
+            <p><strong>Business Transfers.</strong> We may share or transfer your information in connection with, or
+                during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a
+                portion of our business to another company.</p>
+        </li>
+    </ul>
+    <h2 id="4-who-will-your-information-be-shared-with">4. WHO WILL YOUR INFORMATION BE SHARED WITH?</h2>
+    <p><strong>In Short:</strong> We only share information with the following third parties.<br>We only share and
+        disclose your information with the following third parties. We have categorized each party so that you may be
+        easily understand the purpose of our data collection and processing practices. If we have processed your data
+        based on your consent and you wish to revoke your consent, please contact us.</p>
+    <ul>
+        <li><strong>Affiliate Marketing Programs</strong><br>Amazon Affiliation</li>
+        <li><strong>Cloud Computing Services</strong><br>Google Cloud Platform</li>
+        <li><strong>Content Optimization</strong><br>YouTube video embed</li>
+        <li><strong>Functionality and Infrastructure Optimization</strong><br>Cloud Firestore</li>
+        <li><strong>Web and Mobile Analytics</strong><br>Segment, Google Analytics, Amplitude and MixPanel</li>
+        <li><strong>Website Performance Monitoring</strong><br>Crashlytics, Firebase Crash Reporting and Firebase
+            Performance Monitoring</li>
+        <li><strong>Website Testing</strong><br>Google Play Console and TestFlight</li>
+    </ul>
+    <h2 id="5-do-we-use-cookies-and-other-tracking-technologies">5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+    </h2>
+    <p><strong>In Short:</strong> We may use cookies and other tracking technologies to collect and store your
+        information.</p>
+    <p>We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store
+        information. Specific information about how we use such technologies and how you can refuse certain cookies is
+        set out in our Cookie Policy.</p>
+    <h2 id="6-is-your-information-transferred-internationally">6. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?</h2>
+    <p><strong>In Short:</strong> We may transfer, store, and process your information in countries other than your own.
+    </p>
+    <p>Our servers are located in Germany, and Europe. If you are accessing our Apps from outside Germany, and Europe,
+        please be aware that your information may be transferred to, stored, and processed by us in our facilities and
+        by those third parties with whom we may share your personal information (see "WILL YOUR INFORMATION BE SHARED
+        WITH ANYONE?" above), in United States, and other countries.</p>
+    <p>If you are a resident in the European Economic Area, then these countries may not have data protection or other
+        laws as comprehensive as those in your country. We will however take all necessary measures to protect your
+        personal information in accordance with this privacy policy and applicable law.</p>
+    <h2 id="7-how-long-do-we-keep-your-information">7. HOW LONG DO WE KEEP YOUR INFORMATION?</h2>
+    <p><strong>In Short:</strong> We keep your information for as long as necessary to fulfill the purposes outlined in
+        this privacy policy unless otherwise required by law.</p>
+    <p>We will only keep your personal information for as long as it is necessary for the purposes set out in this
+        privacy policy, unless a longer retention period is required or permitted by law (such as tax, accounting or
+        other legal requirements). No purpose in this policy will require us keeping your personal information for
+        longer than the period of time in which users have an account with us.</p>
+    <p>When we have no ongoing legitimate business need to process your personal information, we will either delete or
+        anonymize it, or, if this is not possible (for example, because your personal information has been stored in
+        backup archives), then we will securely store your personal information and isolate it from any further
+        processing until deletion is possible.</p>
+    <h2 id="8-how-do-we-keep-your-information-safe">8. HOW DO WE KEEP YOUR INFORMATION SAFE?</h2>
+    <p><strong>In Short:</strong> We aim to protect your personal information through a system of organizational and
+        technical security measures.</p>
+    <p>We have implemented appropriate technical and organizational security measures designed to protect the security
+        of any personal information we process. However, please also remember that we cannot guarantee that the internet
+        itself is 100% secure. Although we will do our best to protect your personal information, transmission of
+        personal information to and from our Apps is at your own risk. You should only access the services within a
+        secure environment.</p>
+    <h2 id="9-do-we-collect-information-from-minors">9. DO WE COLLECT INFORMATION FROM MINORS?</h2>
+    <p><strong>In Short:</strong> We do not knowingly collect data from or market to children under 18 years of age.</p>
+    <p>We do not knowingly solicit data from or market to children under 18 years of age. By using the Apps, you
+        represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such
+        minor dependent’s use of the Apps. If we learn that personal information from users less than 18 years of age
+        has been collected, we will deactivate the account and take reasonable measures to promptly delete such data
+        from our records. If you become aware of any data we have collected from children under age 18, please contact
+        us at <a href="mailto:mail@listo.social">mail@listo.social</a>.</p>
+    <h2 id="10-what-are-your-privacy-rights">10. WHAT ARE YOUR PRIVACY RIGHTS?</h2>
+    <p><strong>In Short:</strong> In some regions, such as the European Economic Area, you have rights that allow you
+        greater access to and control over your personal information. You may review, change, or terminate your account
+        at any time.</p>
+    <p>In some regions (like the European Economic Area), you have certain rights under applicable data protection laws.
+        These may include the right (i) to request access and obtain a copy of your personal information, (ii) to
+        request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if
+        applicable, to data portability. In certain circumstances, you may also have the right to object to the
+        processing of your personal information. To make such a request, please use the contact details provided below.
+        We will consider and act upon any request in accordance with applicable data protection laws.</p>
+    <p>If we are relying on your consent to process your personal information, you have the right to withdraw your
+        consent at any time. Please note however that this will not affect the lawfulness of the processing before its
+        withdrawal.</p>
+    <p>If you are resident in the European Economic Area and you believe we are unlawfully processing your personal
+        information, you also have the right to complain to your local data protection supervisory authority. You can
+        find their contact details here: <a
+            href="http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm"
+            target="_blank">http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm</a>.</p>
+    <p>If you have questions or comments about your privacy rights, you may email us at <a
+            href="mailto:mail@listo.social">mail@listo.social</a>.</p>
+    <h3 id="account-information">Account Information</h3>
+    <p>If you would at any time like to review or change the information in your account or terminate your account, you
+        can:</p>
+    <ul>
+        <li>
+            <p>Contact us using the contact information provided.</p>
+        </li>
+        <li>
+            <p>Log into your account settings and update your user account.</p>
+        </li>
+    </ul>
+    <p>Upon your request to terminate your account, we will deactivate or delete your account and information from our
+        active databases. However, some information may be retained in our files to prevent fraud, troubleshoot
+        problems, assist with any investigations, enforce our Terms of Use and/or comply with legal requirements.</p>
+    <p><strong>Cookies and similar technologies:</strong> Most Web browsers are set to accept cookies by default. If you
+        prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to
+        remove cookies or reject cookies, this could affect certain features or services of our Apps. To opt-out of
+        interest-based advertising by advertisers on our Apps visit <a href="http://www.aboutads.info/choices/"
+            target="_blank">http://www.aboutads.info/choices/</a>.</p>
+    <p><strong>Opting out of email marketing:</strong> You can unsubscribe from our marketing email list at any time by
+        clicking on the unsubscribe link in the emails that we send or by contacting us using the details provided
+        below. You will then be removed from the marketing email list – however, we will still need to send you
+        service-related emails that are necessary for the administration and use of your account. To otherwise opt-out,
+        you may:</p>
+    <ul>
+        <li>Contact us using the contact information provided.</li>
+    </ul>
+    <h2 id="11-data-breach">11. DATA BREACH</h2>
+    <p>A privacy breach occurs when there is unauthorized access to or collection, use, disclosure or disposal of
+        personal information. You will be notified about data breaches when Listo believes you are likely to be at risk
+        or serious harm. For example, a data breach may be likely to result in serious financial harm or harm to your
+        mental or physical well-being. In the event that Listo becomes aware of a security breach which has resulted or
+        may result in unauthorized access, use or disclosure of personal information Listo will promptly investigate the
+        matter and notify the applicable Supervisory Authority not later than 72 hours after having become aware of it,
+        unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons.
+    </p>
+    <h2 id="12-controls-for-do-not-track-features">12. CONTROLS FOR DO-NOT-TRACK FEATURES</h2>
+    <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track (“DNT”)
+        feature or setting you can activate to signal your privacy preference not to have data about your online
+        browsing activities monitored and collected. No uniform technology standard for recognizing and implementing DNT
+        signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism
+        that automatically communicates your choice not to be tracked online. If a standard for online tracking is
+        adopted that we must follow in the future, we will inform you about that practice in a revised version of this
+        privacy policy.</p>
+    <h2 id="13-do-california-residents-have-specific-privacy-rights">13. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY
+        RIGHTS?</h2>
+    <p><strong>In Short:</strong> Yes, if you are a resident of California, you are granted specific rights regarding
+        access to your personal information.</p>
+    <p>California Civil Code Section 1798.83, also known as the “Shine The Light” law, permits our users who are
+        California residents to request and obtain from us, once a year and free of charge, information about categories
+        of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and
+        addresses of all third parties with which we shared personal information in the immediately preceding calendar
+        year. If you are a California resident and would like to make such a request, please submit your request in
+        writing to us using the contact information provided below.</p>
+    <p>If you are under 18 years of age, reside in California, and have a registered account with the Apps, you have the
+        right to request removal of unwanted data that you publicly post on the Apps. To request removal of such data,
+        please contact us using the contact information provided below, and include the email address associated with
+        your account and a statement that you reside in California. We will make sure the data is not publicly displayed
+        on the Apps, but please be aware that the data may not be completely or comprehensively removed from our
+        systems.</p>
+    <h2 id="14-do-we-make-updates-to-this-policy">14. DO WE MAKE UPDATES TO THIS POLICY?</h2>
+    <p><strong>In Short:</strong> Yes, we will update this policy as necessary to stay compliant with relevant laws.</p>
+    <p>We may update this privacy policy from time to time. The updated version will be indicated by an updated
+        “Revised” date and the updated version will be effective as soon as it is accessible. If we make material
+        changes to this privacy policy, we may notify you either by prominently posting a notice of such changes or by
+        directly sending you a notification. We encourage you to review this privacy policy frequently to be informed of
+        how we are protecting your information.</p>
+    <h2 id="15-how-can-you-contact-us-about-this-policy">15. HOW CAN YOU CONTACT US ABOUT THIS POLICY?</h2>
+    <p>If you have questions or comments about this policy, you may email us at <a
+            href="mailto:mail@listo.social">mail@listo.social</a>
+    <h2 id="how-can-you-review-update-or-delete-the-data-we-collect-from-you">HOW CAN YOU REVIEW, UPDATE, OR DELETE THE
+        DATA WE COLLECT FROM YOU?</h2>
+    <p>Based on the laws of some countries, you may have the right to request access to the personal information we
+        collect from you, change that information, or delete it in some circumstances. To request to review, update, or
+        delete your personal information, please visit: <a href="privacy.html"
+            target="_blank">https://listo.social/privacy.html</a>. We will respond to your request within 30 days.</p>
+    <p>This privacy policy was created using <a href="https://termly.io/products/privacy-policy-generator/?ftseo"
+            target="_blank">Termly’s Privacy Policy Generator</a>.</p>
+
+
+</body>
+
+</html>
