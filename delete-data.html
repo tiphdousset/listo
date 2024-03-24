@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Listo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have" />
+
+<meta property="og:title" content="Listo">
+<meta property="og:description"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have">
+<meta property="og:image" content="}ndroid-chrome-512x512.png">
+<meta property="og:url" content="https://listo.social">
+<meta name="twitter:card"
+    content="Your Social Watchlist. - Let your friends put recommendations directly into your list. Without any effort, it will be full of things that your friends have">
+<style>
+    /* page navigation */
+    .page-navigation-body-side {
+        max-width: 970px !important;
+        /* theme body + 220px navigation */
+    }
+
+    .page-navigation-body.page-navigation-body-side .page-navigation-wrap {
+        flex-wrap: wrap-reverse;
+    }
+
+    .page-navigation-body-side .page-navigation-wrap {
+        display: flex;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-navigation-body-side .page-navigation-wrap .page-navigation {
+        width: 200px;
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation {
+        padding-bottom: 20px;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation ul {
+        align-items: center;
+        display: flex;
+    }
+
+    .page-navigation-body-top .page-navigation-wrap .page-navigation ul>li {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .page-navigation-wrap .page-navigation ul {
+        list-style-type: none;
+    }
+
+    .page-navigation-wrap .page-navigation li {
+        margin: 0;
+    }
+
+    .page-navigation-wrap .page-navigation a {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 2px 8px;
+        display: inline-block;
+    }
+
+    .page-navigation-body .page-navigation-wrap .page-content {
+        max-width: 750px;
+    }
+
+
+    /* new.css 1.1.3 */
+    /* modification: body, .preview-body { ... } */
+
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    address,
+    area,
+    article,
+    aside,
+    audio,
+    blockquote,
+    datalist,
+    details,
+    dl,
+    fieldset,
+    figure,
+    form,
+    iframe,
+    img,
+    input,
+    meter,
+    nav,
+    ol,
+    optgroup,
+    option,
+    output,
+    p,
+    pre,
+    progress,
+    ruby,
+    section,
+    table,
+    textarea,
+    ul,
+    video {
+        margin-bottom: 1rem
+    }
+
+    button,
+    html,
+    input,
+    select {
+        font-family: var(--nc-font-sans)
+    }
+
+    body,
+    .preview-body {
+        margin: 0 auto;
+        max-width: 750px;
+        padding: 2rem;
+        border-radius: 6px;
+        overflow-x: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        background: var(--nc-bg-1);
+        color: var(--nc-tx-2);
+        font-size: 1.03rem;
+        line-height: 1.5
+    }
+
+    ::selection {
+        background: var(--nc-ac-1);
+        color: var(--nc-ac-tx)
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1;
+        color: var(--nc-tx-1);
+        padding-top: .875rem
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: var(--nc-tx-1);
+        padding-bottom: 2px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid var(--nc-bg-2)
+    }
+
+    h4,
+    h5,
+    h6 {
+        margin-bottom: .3rem
+    }
+
+    h1 {
+        font-size: 2.25rem
+    }
+
+    h2 {
+        font-size: 1.85rem
+    }
+
+    h3 {
+        font-size: 1.55rem
+    }
+
+    h4 {
+        font-size: 1.25rem
+    }
+
+    h5 {
+        font-size: 1rem
+    }
+
+    h6 {
+        font-size: .875rem
+    }
+
+    a {
+        color: var(--nc-lk-1)
+    }
+
+    a:hover {
+        color: var(--nc-lk-2)
+    }
+
+    abbr:hover {
+        cursor: help
+    }
+
+    blockquote {
+        padding: 1.5rem;
+        background: var(--nc-bg-2);
+        border-left: 5px solid var(--nc-bg-3)
+    }
+
+    abbr {
+        cursor: help
+    }
+
+    blockquote :last-child {
+        padding-bottom: 0;
+        margin-bottom: 0
+    }
+
+    header {
+        background: var(--nc-bg-2);
+        border-bottom: 1px solid var(--nc-bg-3);
+        padding: 2rem 1.5rem;
+        margin: -2rem calc(0px - (50vw - 50%)) 2rem;
+        padding-left: calc(50vw - 50%);
+        padding-right: calc(50vw - 50%)
+    }
+
+    header h1,
+    header h2,
+    header h3 {
+        padding-bottom: 0;
+        border-bottom: 0
+    }
+
+    header>:first-child {
+        margin-top: 0;
+        padding-top: 0
+    }
+
+    header>:last-child {
+        margin-bottom: 0
+    }
+
+    a button,
+    button,
+    input[type=button],
+    input[type=reset],
+    input[type=submit] {
+        font-size: 1rem;
+        display: inline-block;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        background: var(--nc-lk-1);
+        color: var(--nc-lk-tx);
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        color: var(--nc-lk-tx)
+    }
+
+    a button[disabled],
+    button[disabled],
+    input[type=button][disabled],
+    input[type=reset][disabled],
+    input[type=submit][disabled] {
+        cursor: default;
+        opacity: .5;
+        cursor: not-allowed
+    }
+
+    .button:focus,
+    .button:hover,
+    button:focus,
+    button:hover,
+    input[type=button]:focus,
+    input[type=button]:hover,
+    input[type=reset]:focus,
+    input[type=reset]:hover,
+    input[type=submit]:focus,
+    input[type=submit]:hover {
+        background: var(--nc-lk-2)
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        font-family: var(--nc-font-mono)
+    }
+
+    code,
+    kbd,
+    pre,
+    samp {
+        background: var(--nc-bg-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px;
+        padding: 3px 6px;
+        font-size: .9rem
+    }
+
+    kbd {
+        border-bottom: 3px solid var(--nc-bg-3)
+    }
+
+    pre {
+        padding: 1rem 1.4rem;
+        max-width: 100%;
+        overflow: auto
+    }
+
+    pre code {
+        background: inherit;
+        font-size: inherit;
+        color: inherit;
+        border: 0;
+        padding: 0;
+        margin: 0
+    }
+
+    code pre {
+        display: inline;
+        background: inherit;
+        font-size: inherit;
+        color: inherit;
+        border: 0;
+        padding: 0;
+        margin: 0
+    }
+
+    details {
+        padding: .6rem 1rem;
+        background: var(--nc-bg-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px
+    }
+
+    summary {
+        cursor: pointer;
+        font-weight: 700
+    }
+
+    details[open] {
+        padding-bottom: .75rem
+    }
+
+    details[open] summary {
+        margin-bottom: 6px
+    }
+
+    details[open]>:last-child {
+        margin-bottom: 0
+    }
+
+    dt {
+        font-weight: 700
+    }
+
+    dd::before {
+        content: '→ '
+    }
+
+    hr {
+        border: 0;
+        border-bottom: 1px solid var(--nc-bg-3);
+        margin: 1rem auto
+    }
+
+    fieldset {
+        margin-top: 1rem;
+        padding: 2rem;
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px
+    }
+
+    legend {
+        padding: auto .5rem
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%
+    }
+
+    td,
+    th {
+        border: 1px solid var(--nc-bg-3);
+        text-align: left;
+        padding: .5rem
+    }
+
+    th {
+        background: var(--nc-bg-2)
+    }
+
+    tr:nth-child(even) {
+        background: var(--nc-bg-2)
+    }
+
+    table caption {
+        font-weight: 700;
+        margin-bottom: .5rem
+    }
+
+    textarea {
+        max-width: 100%
+    }
+
+    ol,
+    ul {
+        padding-left: 2rem
+    }
+
+    li {
+        margin-top: .4rem
+    }
+
+    ol ol,
+    ol ul,
+    ul ol,
+    ul ul {
+        margin-bottom: 0
+    }
+
+    mark {
+        padding: 3px 6px;
+        background: var(--nc-ac-1);
+        color: var(--nc-ac-tx)
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 6px 12px;
+        margin-bottom: .5rem;
+        background: var(--nc-bg-2);
+        color: var(--nc-tx-2);
+        border: 1px solid var(--nc-bg-3);
+        border-radius: 4px;
+        box-shadow: none;
+        box-sizing: border-box
+    }
+
+    img {
+        max-width: 100%
+    }
+
+
+    /* custom new.css overwrites */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        border-bottom: 0 !important;
+    }
+
+    /* custom active links */
+    .active-link {
+        background-color: var(--nav-link-highlight-color);
+        border-radius: 3px;
+    }
+
+    /* Light mode */
+
+    :root {
+        --nc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --nc-font-mono: 'Roboto Mono', Consolas, monaco, 'Liberation Mono', 'Courier New', Courier, monospace;
+        --nc-tx-1: #000000;
+        /* Heading text color */
+        --nc-tx-2: #1A1A1A;
+        /* Body text color */
+        --nc-bg-1: #FFFFFF;
+        /* Base background color */
+        --nc-bg-2: #F6F8FA;
+        /* Slightly darker background color */
+        --nc-bg-3: #E5E7EB;
+        /* Even slightly darker background color */
+        --nc-lk-1: #3F3F3F;
+        /* Action color for links and buttons */
+        --nc-lk-2: #000000;
+        /* Link and buttons on mouse hover and active */
+        --nc-lk-tx: #FFFFFF;
+        /* Text color for link buttons, or cases where link color is used as a background */
+        --nc-ac-1: #3F3F3F;
+        /* Accent background color for <mark> and text selection background */
+        --nc-ac-tx: #FFFFFF;
+        /* Text color when accent is used as a background */
+        --nav-link-color: var(--nc-tex-2);
+        --nav-link-highlight-color: #c2e8ff;
+    }
+
+
+    /* Dark mode */
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --nc-tx-1: #F1F1F1;
+            /* Heading text color */
+            --nc-tx-2: #E1E1E1;
+            /* Body text color */
+            --nc-bg-1: #1E1E1E;
+            /* Base background color */
+            --nc-bg-2: #232323;
+            /* Slightly lighter background color */
+            --nc-bg-3: #333333;
+            /* Even slightly lighter background color */
+            --nc-lk-1: #8FC3FF;
+            /* Action color for links and buttons */
+            --nc-lk-2: #FFFFFF;
+            /* Link and buttons on mouse hover and active */
+            --nc-lk-tx: #000000;
+            /* Text color for link buttons, or cases where link color is used as a background */
+            --nc-ac-1: #86BDFC;
+            /* Accent background color for <mark> and text selection background */
+            --nc-ac-tx: #FFFFFF;
+            /* Text color when accent is used as a background */
+            --nav-link-color: var(--nc-tex-2);
+            --nav-link-highlight-color: #4a5664;
+        }
+</style>
+</head>
+
+<body class="page-navigation-body-none page-navigation-body">
+    <h1>Delete account</h1>
+    <p>Please contact us if you want your account to be deleted:
+        <a href="mailto:mail@listo.social">mail@listo.social</a>
+    </p>
+</body>
+
+</html>
